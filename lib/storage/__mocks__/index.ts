@@ -1,8 +1,9 @@
+import type {OnyxKey, OnyxValue} from '../../types';
 import utils from '../../utils';
-import type {Key, KeyValuePairList, Value} from '../providers/types';
+import type {KeyValuePairList} from '../providers/types';
 import type StorageProvider from '../providers/types';
 
-let storageMapInternal: Record<Key, Value> = {};
+let storageMapInternal: Record<OnyxKey, OnyxValue> = {};
 
 const set = jest.fn((key, value) => {
     storageMapInternal[key] = value;
@@ -34,8 +35,7 @@ const idbKeyvalMock: StorageProvider = {
     multiMerge(pairs) {
         pairs.forEach(([key, value]) => {
             const existingValue = storageMapInternal[key];
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const newValue = utils.fastMerge(existingValue as any, value);
+            const newValue = utils.fastMerge(existingValue!, value!);
 
             set(key, newValue);
         });
