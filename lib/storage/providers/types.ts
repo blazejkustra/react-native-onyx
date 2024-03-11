@@ -72,4 +72,4 @@ type StorageProvider = {
 };
 
 export default StorageProvider;
-export type {KeyList, KeyValuePair, KeyValuePairList, OnStorageKeyChanged};
+export type {KeyList, KeyValuePair, KeyValuePairList};
